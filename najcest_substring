@@ -1,0 +1,40 @@
+//ako ima povekje so ista frekvencija, togas najdolgiot, ako pak ima isti leksikografski prviot
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    string s;
+    cin>>s;
+    string res="";
+    map<string, int> povt;
+
+    for(int i=0 ; i<s.size() ; i++)
+    {
+        string sub="";
+        for(int j=i ; j<s.size() ; j++)
+        {
+            sub+=s[j];
+            //cout<<sub<<endl;
+            povt[sub]++;
+
+            if(povt[sub] > povt[res])
+            {
+                res=sub;
+            }
+
+            else if(povt[sub] == povt[res] && sub.size()>res.size())
+            {
+                res=sub;
+            }
+
+            else if(povt[sub] == povt[res] && sub.size()==res.size() && sub<res)
+            {
+                res=sub;
+            }
+        }
+    }
+    cout<<res;
+    return 0;
+}
