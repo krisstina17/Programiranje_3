@@ -1,3 +1,4 @@
+//zadacka : postfix notacija
 #include <bits/stdc++.h>
 
 using namespace std;
