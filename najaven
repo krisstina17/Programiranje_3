@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int n;
+    cin>>n;
+    string ime,lozinka;
+    map<string,string> sistem;
+    for(int i=0 ; i<n ; i++)
+    {
+        cin>>ime>>lozinka;
+        sistem[ime]=lozinka;
+    }
+
+    while(1)
+    {
+        cin>>ime>>lozinka;
+        if(ime=="KRAJ")
+            break;
+
+        if(lozinka==sistem[ime])
+        {
+            cout<<"Najaven"<<endl;
+            return 0;
+        }
+        else
+        {
+            cout<<"Nenajaven"<<endl;
+        }
+    }
+    return 0;
+}
