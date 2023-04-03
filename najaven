@@ -24,7 +24,6 @@ int main()
         if(lozinka==sistem[ime])
         {
             cout<<"Najaven"<<endl;
-            return 0;
         }
         else
         {
