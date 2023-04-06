@@ -1,0 +1,180 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int n,d;
+    cin>>n>>d;
+    deque<int> dq;
+    for(int i=0 ; i<n ; i++)
+    {
+        int a;
+        cin>>a;
+        dq.push_back(a);
+    }
+
+    for(int i=d ; i<n ; i++)
+    {
+        int el=dq.back();
+        dq.pop_back();
+        dq.push_front(el);
+    }
+    for (auto el : dq)
+        cout<<el<<" ";
+
+    return 0;
+}
+
+**************************************
+
+/*
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    list<int> a,b,c;
+    int n,m,el;
+    cin>>n;
+    for(int i=0 ; i<n ; i++)
+    {
+        cin>>el;
+        a.push_back(el);
+        c.push_back(el);
+    }
+    cin>>m;
+    for(int i=0 ; i<m ; i++)
+    {
+        int el;
+        cin>>el;
+        b.push_back(el);
+        c.push_back(el);
+    }
+    c.sort();
+    auto it=c.begin();
+    while(it!=c.end())
+    {
+        cout<<*it<<" ";
+        it++;
+    }
+    return 0;
+}
+*/
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+list<int> a,b,c;
+int n,m,el;
+
+void Merge()
+{
+    auto it1=a.begin();
+    auto it2=b.begin();
+
+    while(it1!=a.end() && it2!=b.end())
+    {
+        if(*it1 < *it2)
+        {
+            c.push_back(*it1);
+            it1++;
+        }
+        else
+        {
+            c.push_back(*it2);
+            it2++;
+        }
+    }
+
+    while(it1!=a.end())
+    {
+        c.push_back(*it1);
+        it1++;
+    }
+    while(it2!=b.end())
+    {
+        c.push_back(*it2);
+        it2++;
+    }
+    return;
+}
+
+int main()
+{
+    cin>>n;
+    for(int i=0 ; i<n ; i++)
+    {
+        cin>>el;
+        a.push_back(el);
+    }
+    cin>>m;
+    for(int i=0 ; i<m ; i++)
+    {
+        cin>>el;
+        b.push_back(el);
+    }
+    Merge();
+    auto it=c.begin();
+    while(it!=c.end())
+    {
+        cout<<*it<<" ";
+        it++;
+    }
+    return 0;
+}
+
+
+**********************************
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool par(char a, char b)
+{
+    if(a=='(' && b==')')
+        return true;
+
+    if(a=='[' && b==']')
+        return true;
+
+    if(a=='{' && b=='}')
+        return true;
+
+    return false;
+}
+
+int main()
+{
+    string izraz;
+    cin>>izraz;
+    stack<char> s;
+    for(int i=0 ; i<izraz.size() ; i++)
+    {
+        if(izraz[i]=='(' || izraz[i]=='[' || izraz[i]=='{')
+            s.push(izraz[i]);
+
+        else if(izraz[i]==')' || izraz[i]==']' || (izraz[i]=='}'))
+        {
+            if(s.empty() || !par(s.top(),izraz[i]))
+            {
+                cout<<"NEKOREKTEN"<<endl;
+                return 0;
+            }
+
+            else
+                s.pop();
+        }
+    }
+
+    if(!s.empty())
+        cout<<"NEKOREKTEN"<<endl;
+    else
+        cout<<"KOREKTEN"<<endl;
+    return 0;
+}
