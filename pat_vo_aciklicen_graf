@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n,m;
+int visited[100];
+vector<int> G[100];
+vector<int> pat;
+
+void dfs(int node, vector<int> pom)
+{
+    pom.push_back(node);
+
+    if(node==n)
+    {
+        pat=pom;
+        return;
+    }
+
+    visited[node]=1;
+
+    for(auto next : G[node])
+    {
+        if(!visited[next])
+        {
+            dfs(next,pom);
+        }
+    }
+    pom.pop_back();
+}
+
+int main()
+{
+    int a,b;
+    cin>>n>>m;
+    for(int i=0 ; i<m ; i++)
+    {
+        cin>>a>>b;
+        G[a].push_back(b);
+    }
+    memset(visited,0,sizeof(visited));
+    dfs(1,pat);
+    for(int i=0 ; i<pat.size() ; i++)
+        cout<<pat[i]<<" ";
+    if(pat.size()==0)
+        cout<<"NE POSTOI PAT";
+    return 0;
+}
+
+/*
+4
+5
+1 2
+1 3
+2 1
+3 2
+3 4
+*/
+
+
