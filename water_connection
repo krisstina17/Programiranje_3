@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<pair<int, int> > G[100];
+bool izlezni[100];
+bool vlezni[100];
+int min_dist=INT_MAX;
+
+void dfs(int node, int min_dist)
+{
+    if(!izlezni[node])
+    {
+        cout<<" "<<node<<" "<<min_dist<<endl;
+    }
+
+    else
+    {
+        auto next = G[node][0];
+        min_dist=min(min_dist, next.second);
+        dfs(next.first, min_dist);
+    }
+}
+
+int main()
+{
+    int n,p;
+    int a,b,c;
+    cin>>n>>p;
+    memset(vlezni,0,sizeof(vlezni));
+    memset(izlezni,0,sizeof(izlezni));
+    for(int i=0 ; i<p ; i++)
+    {
+        cin>>a>>b>>c;
+        G[a].push_back({b,c});
+        vlezni[b]=1;
+        izlezni[a]=1;
+    }
+
+    for(int i=1 ; i<=n ; i++)
+    {
+        if(!vlezni[i])
+        {
+            cout<<i;
+            dfs(i, INT_MAX);
+        }
+    }
+
+    return 0;
+}
+
+
+/*
+9 6
+2 1 5
+5 4 2
+3 5 3
+7 6 11
+8 9 7
+6 8 4
+*/
